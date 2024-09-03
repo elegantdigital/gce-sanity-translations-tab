@@ -50,6 +50,11 @@ export interface Adapter {
     callbackUrl?: string,
   ) => Promise<TranslationTask>
   getTranslation: (taskid: string, localeId: string, secrets: Secrets | null) => Promise<any | null>
+  removeTranslationAfterImport?: (
+    taskid: string,
+    localeId: string,
+    secrets: Secrets | null,
+  ) => Promise<boolean | null>
 }
 
 export interface TranslationFunctionContext {

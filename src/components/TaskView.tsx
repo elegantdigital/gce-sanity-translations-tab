@@ -54,6 +54,21 @@ export const TaskView = ({task, locales, refreshTask}: JobProps) => {
           status: 'success',
           closable: true,
         })
+
+        if (typeof context.adapter.removeTranslationAfterImport === 'function') {
+          const result = await context.adapter.removeTranslationAfterImport(
+            task.taskId,
+            localeId,
+            context.secrets,
+          )
+          if (!result) {
+            toast.push({
+              title: `Failed to remove ${localeTitle} from translations system`,
+              status: 'error',
+              closable: true,
+            })
+          }
+        }
       } catch (err) {
         let errorMsg
         if (err instanceof Error) {

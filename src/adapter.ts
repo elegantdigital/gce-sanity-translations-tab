@@ -85,4 +85,18 @@ export const DummyAdapter: Adapter = {
       })
     })
   },
+  removeTranslationAfterImport: async (taskId: string, localeId: string) => {
+    //eslint-disable-next-line no-console -- this is for testing reasons
+    console.debug('removing locale', localeId)
+    //eslint-disable-next-line no-empty-function
+    await setTimeout(() => {}, 1000)
+    const task = getTaskDetails(taskId)
+    if (!task) {
+      return null
+    }
+
+    return new Promise((resolve) => {
+      resolve(true)
+    })
+  },
 }
