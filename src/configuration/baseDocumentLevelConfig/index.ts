@@ -14,7 +14,9 @@ import {
 import {DummyAdapter} from '../../adapter'
 
 export const baseDocumentLevelConfig = {
-  c: async (...params: Parameters<ExportForTranslation>): Promise<SerializedDocument> => {
+  exportForTranslation: async (
+    ...params: Parameters<ExportForTranslation>
+  ): Promise<SerializedDocument> => {
     const [
       id,
       context,
