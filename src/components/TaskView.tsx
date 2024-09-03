@@ -59,6 +59,7 @@ export const TaskView = ({task, locales, refreshTask}: JobProps) => {
           const result = await context.adapter.removeTranslationAfterImport(
             task.taskId,
             localeId,
+            translation,
             context.secrets,
           )
           if (!result) {
