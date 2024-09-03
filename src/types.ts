@@ -53,7 +53,6 @@ export interface Adapter {
   removeTranslationAfterImport?: (
     taskid: string,
     localeId: string,
-    translationData: any,
     secrets: Secrets | null,
   ) => Promise<boolean | null>
 }
