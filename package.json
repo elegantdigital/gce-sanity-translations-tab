@@ -45,7 +45,7 @@
   "scripts": {
     "build": "run-s clean && plugin-kit verify-package --silent && pkg-utils build --strict && pkg-utils --strict",
     "lint": "eslint .",
-    "prepare": "husky install",
+    "prepare": "husky install && npm run build",
     "clean": "rimraf dist",
     "format": "prettier --write --cache --ignore-unknown .",
     "link-watch": "plugin-kit link-watch",
