@@ -14,15 +14,14 @@ import {
 import {DummyAdapter} from '../../adapter'
 
 export const baseDocumentLevelConfig = {
-  exportForTranslation: async (
-    ...params: Parameters<ExportForTranslation>
-  ): Promise<SerializedDocument> => {
+  c: async (...params: Parameters<ExportForTranslation>): Promise<SerializedDocument> => {
     const [
       id,
       context,
       baseLanguage = 'en',
       serializationOptions = {},
       languageField = 'language',
+      getDocumentName = (doc) => doc._id,
     ] = params
     const {client, schema} = context
     const stopTypes = [...(serializationOptions.additionalStopTypes ?? []), ...defaultStopTypes]
@@ -34,6 +33,7 @@ export const baseDocumentLevelConfig = {
       },
     }
     const doc = await findLatestDraft(id, client)
+    const name = getDocumentName(doc)
     delete doc[languageField]
     const serialized = BaseDocumentSerializer(schema).serializeDocument(
       doc,
@@ -42,7 +42,7 @@ export const baseDocumentLevelConfig = {
       stopTypes,
       serializers,
     )
-    serialized.name = id
+    serialized.name = name
     return serialized
   },
   importTranslation: (...params: Parameters<ImportTranslation>): Promise<void> => {

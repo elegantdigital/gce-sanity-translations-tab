@@ -1,4 +1,4 @@
-import {SanityClient, Schema, TypedObject} from 'sanity'
+import {SanityClient, Schema, TypedObject, SanityDocument} from 'sanity'
 import {SerializedDocument} from 'sanity-naive-html-serializer'
 import {PortableTextTypeComponent} from '@portabletext/to-html'
 import {DeserializerRule} from '@sanity/block-tools'
@@ -71,6 +71,7 @@ export type ExportForTranslation = (
     additionalSerializers?: Record<string, PortableTextTypeComponent | undefined>
   },
   languageField?: string,
+  getDocumentName?: (doc: SanityDocument) => string,
 ) => Promise<SerializedDocument>
 
 export type ImportTranslation = (
@@ -104,4 +105,5 @@ export type TranslationsTabConfigOptions = {
   languageField?: string
   callbackUrl?: string
   mergeWithTargetLocale?: boolean
+  getDocumentName?: (doc: SanityDocument) => string
 }
