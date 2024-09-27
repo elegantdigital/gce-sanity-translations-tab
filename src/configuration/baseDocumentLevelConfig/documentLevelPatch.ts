@@ -37,6 +37,14 @@ export const documentLevelPatch = async (
     baseDoc = await findLatestDraft(documentId, client)
   }
 
+  console.log("SanityTranslationsTab: Import of metadata", {
+    translatedId: translatedFields._id,
+    translatedRev: translatedFields._rev,
+    baseDoc,
+    documentId,
+    baseLanguage
+  });
+  
   /* first, check our metadata to see if a translated document exists
    * if no metadata exists, we create it
    */
@@ -45,6 +53,8 @@ export const documentLevelPatch = async (
     translationMetadata = await createTranslationMetadata(baseDoc, client, baseLanguage)
   }
 
+  
+  
   //the id of the translated document should be on the metadata if it exists
   const i18nDocId = (translationMetadata.translations as Array<Record<string, any>>).find(
     (translation) => translation._key === localeId,
